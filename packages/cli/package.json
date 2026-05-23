@@ -1,17 +1,32 @@
 {
-  "name": "@arenacode/cli",
+  "name": "arenacode-cli",
+  "version": "1.0.0",
+  "description": "ArenaCode terminal client for agentic AI chat and tool execution.",
+  "keywords": [
+    "arenacode",
+    "cli",
+    "terminal",
+    "ai",
+    "chat",
+    "bun",
+    "tui"
+  ],
   "module": "src/index.tsx",
   "type": "module",
-  "private": true,
   "bin": {
-    "arenacode": "./bin/arenacode"
+    "arenacode": "bin/arenacode"
   },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "bun run --watch src/index.tsx",
-    "build": "bun build src/index.tsx --outdir dist --target bun"
+    "build": "bun build src/index.tsx --outdir dist --target bun",
+    "prepack": "bun run build"
   },
   "devDependencies": {
-    "@arenacode/server": "workspace:*",
     "@types/bun": "latest",
     "@types/react": "^19.2.14"
   },
@@ -20,7 +35,6 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.186",
-    "@arenacode/shared": "workspace:*",
     "@opentui/core": "^0.1.97",
     "@opentui/react": "^0.1.97",
     "ai": "^6.0.184",

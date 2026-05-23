@@ -69,7 +69,7 @@ git checkout 07-tool-calling  # example: jump to tool calling
 - [Bun](https://cwa.run/bun?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=prerequisites_bun) installed
 - PostgreSQL database, such as [Neon](https://cwa.run/neon?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=prerequisites_neon)
 - [Clerk](https://cwa.run/clerk?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=prerequisites_clerk) application configured for OAuth
-- Anthropic and/or OpenAI API key
+- OpenRouter API key
 - [Polar](https://cwa.run/polar?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=prerequisites_polar) account and credits meter
 
 ### 1. Clone and install
@@ -209,6 +209,18 @@ bun run link:cli
 arenacode
 ```
 
+## Production Backend With Docker Compose
+
+The CLI is meant to be published separately, so the production container stack only includes the API and Postgres.
+
+1. Fill in the required production env vars in a root `.env` file or export them in your shell.
+2. Make sure you set `OPENROUTER_API_KEY`, `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `POLAR_ACCESS_TOKEN`, `POLAR_PRODUCT_ID`, `POLAR_CREDITS_METER_ID`, `POLAR_SERVER=production`, and `JWT_SECRET`.
+3. Start the stack with `docker compose up --build`.
+
+The compose file brings up Postgres, runs `prisma db push` once to create the schema, and then starts the Hono API on port `3000`.
+
+The API exposes a `/health` endpoint for container health checks.
+
 ## Project Structure
 
 ```
@@ -241,7 +253,7 @@ packages/
 
 | Package | Description |
 |---------|-------------|
-| `@arenacode/cli` | Terminal UI and client-side tool execution |
+| `arenacode-cli` | Terminal UI and client-side tool execution |
 | `@arenacode/server` | Hono API, AI streaming, auth checks, and billing ingestion |
 | `@arenacode/database` | Prisma client and database schema |
 | `@arenacode/shared` | Shared Zod schemas, AI tool contracts, and model definitions |

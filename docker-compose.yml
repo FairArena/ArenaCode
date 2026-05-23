@@ -1,0 +1,14 @@
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    env_file:
+      - .env.arena_code
+    ports:
+      - "9876:3000"
+    restart: unless-stopped

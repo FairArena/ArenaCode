@@ -144,7 +144,7 @@ export async function hasActiveSubscription(customerExternalId: string): Promise
     return activeSubscriptions.some(
       (sub) =>
         sub.productId === targetProductId &&
-        (sub.status === "active" || sub.status === "trialing") &&
+        (sub.status === "active") &&
         !sub.cancelAtPeriodEnd
     );
   } catch (error) {

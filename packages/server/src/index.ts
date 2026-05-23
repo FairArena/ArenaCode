@@ -14,6 +14,8 @@ import billing from "./routes/billing";
 
 const app = new Hono();
 
+app.get("/health", (c) => c.text("ok"));
+
 app.onError((error, c) => {
   if (error instanceof HTTPException) {
     return c.json({ 

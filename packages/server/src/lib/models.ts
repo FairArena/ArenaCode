@@ -5,8 +5,9 @@ import {
   type SupportedChatModelId,
   type SupportedProvider,
 } from "@arenacode/shared";
-import type { ProviderOptions } from "@ai-sdk/provider-utils";
 import type { LanguageModel } from "ai";
+
+type ProviderOptions = Record<string, unknown>;
 
 export type ResolvedModel = {
   model: LanguageModel;
