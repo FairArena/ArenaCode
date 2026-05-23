@@ -9,13 +9,13 @@
       },
     },
     "packages/cli": {
-      "name": "@arenacode/cli",
+      "name": "arenacode-cli",
+      "version": "1.0.1",
       "bin": {
-        "arenacode": "./bin/arenacode",
+        "arenacode": "bin/arenacode",
       },
       "dependencies": {
         "@ai-sdk/react": "^3.0.186",
-        "@arenacode/shared": "workspace:*",
         "@opentui/core": "^0.1.97",
         "@opentui/react": "^0.1.97",
         "ai": "^6.0.184",
@@ -29,7 +29,6 @@
         "zod": "^4.3.6",
       },
       "devDependencies": {
-        "@arenacode/server": "workspace:*",
         "@types/bun": "latest",
         "@types/react": "^19.2.14",
       },
@@ -54,6 +53,7 @@
       "dependencies": {
         "@ai-sdk/anthropic": "^3.0.68",
         "@ai-sdk/openai": "^3.0.52",
+        "@ai-sdk/provider-utils": "^4.0.27",
         "@arenacode/database": "workspace:*",
         "@arenacode/shared": "workspace:*",
         "@clerk/backend": "^3.2.8",
@@ -85,8 +85,6 @@
     "@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.27", "", { "dependencies": { "@ai-sdk/provider": "3.0.10", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.8" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-ubkAJ+xODouwtmN1tYlvTPphH1hPOBfZaEQe8U7skGvFAnIRs9PPpsq57bC2+Ky/MB4yzhd6YOsxTAx9sGpazw=="],
 
     "@ai-sdk/react": ["@ai-sdk/react@3.0.193", "", { "dependencies": { "@ai-sdk/provider-utils": "4.0.27", "ai": "6.0.191", "swr": "^2.2.5", "throttleit": "2.1.0" }, "peerDependencies": { "react": "^18 || ~19.0.1 || ~19.1.2 || ^19.2.1" } }, "sha512-El0jUZ/B7mvBHAD5rfSDqOAhWxutVTq7BCNhfGuwfDPT9SO0TMHybh2bMkieJQI7YOfl+qNBoWrRAOHHaFb99Q=="],
-
-    "@arenacode/cli": ["@arenacode/cli@workspace:packages/cli"],
 
     "@arenacode/database": ["@arenacode/database@workspace:packages/database"],
 
@@ -261,6 +259,8 @@
     "ansi-regex": ["ansi-regex@6.2.2", "", {}, "sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg=="],
 
     "any-base": ["any-base@1.1.0", "", {}, "sha512-uMgjozySS8adZZYePpaWs8cxB9/kdzmpX6SgJZ+wbz1K5eYk5QMYDVJaZKhxyIHUdnnJkfR7SVgStgH7LkGUyg=="],
+
+    "arenacode-cli": ["arenacode-cli@workspace:packages/cli"],
 
     "await-to-js": ["await-to-js@3.0.0", "", {}, "sha512-zJAaP9zxTcvTHRlejau3ZOY4V7SRpiByf3/dxx2uyKxxor19tpmpV2QRsTKikckwhaPmr2dVpxxMr7jOCYVp5g=="],
 

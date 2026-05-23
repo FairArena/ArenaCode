@@ -6,6 +6,8 @@ export {
   type SupportedChatModelId,
 } from "./models";
 
+export { renderSuccessPage } from "./success-page";
+
 export {
   Mode,
   modeSchema,

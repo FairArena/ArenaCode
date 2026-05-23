@@ -1,5 +1,6 @@
 import open from "open";
 import { saveAuth } from "./auth";
+import { renderSuccessPage } from "@arenacode/shared";
 
 const LOGIN_TIMEOUT_MS = 5 * 60 * 1000;
 
@@ -117,7 +118,18 @@ export async function performLogin() {
           saveAuth({ token: tokenData.access_token });
           resolve({ token: tokenData.access_token });
           setTimeout(() => server.stop(), 500);
-          return new Response("Authenticated! You can close this tab.");
+          return new Response(
+            renderSuccessPage({
+              eyebrow: "Authenticated",
+              title: "Sign-in complete",
+              message: "You can close this tab and return to ArenaCode.",
+              detail: "The CLI has securely stored your session and is ready to continue.",
+              accent: "#56D6C2",
+            }),
+            {
+              headers: { "content-type": "text/html; charset=utf-8" },
+            },
+          );
         } catch (err) {
           settled = true;
           reject(err);
