@@ -57,7 +57,7 @@ git checkout 07-tool-calling  # example: jump to tool calling
 - **Plan and Build Modes** - Use read-only planning tools or enable write, edit, and shell execution tools for implementation
 - **Streaming Responses** - Stream model output through the AI SDK with persisted session history
 - **Local Project Tools** - Read files, list directories, glob, grep, write files, edit files, and run shell commands inside the current project
-- **Multi-Model Support** - Use supported Anthropic and OpenAI chat models from a shared model registry
+- **Multi-Model Support** - Use backend-owned Anthropic, OpenAI, and OpenRouter-backed chat models with server-side pricing
 - **Persistent Sessions** - Store authenticated user sessions and messages in Postgres via Prisma
 - **Clerk OAuth** - Authenticate the CLI through a browser-based Clerk OAuth flow
 - **Usage Billing** - Meter AI usage as credits through Polar before allowing session and chat actions
@@ -236,7 +236,7 @@ packages/
 │       └── screens/             # Home, new session, and session screens
 ├── database/                    # Prisma schema, generated client, database exports
 ├── server/                      # Hono API for auth, billing, sessions, and chat
-└── shared/                      # Shared schemas, tool contracts, and model registry
+└── shared/                      # Shared schemas and tool contracts used across the app
 ```
 
 ## Scripts

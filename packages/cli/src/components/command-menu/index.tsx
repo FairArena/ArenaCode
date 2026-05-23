@@ -1,16 +1,12 @@
 import type { RefObject } from "react";
 import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core";
 import { getFilteredCommands } from "./filter-commands";
-import { COMMANDS } from "./commands";
+import { getCommands } from "./commands";
 import { useTheme } from "../../providers/theme";
 import { useAuth } from "../../providers/auth";
+import { usePromptConfig } from "../../providers/prompt-config";
 
 const MAX_VISIBLE_ITEMS = 8;
-
-// Align all command names in a fixed-width column so their descriptions
-// start at the same horizontal position for a clean tabular look.
-// The width adjusts to accommodate the longest command name.
-const COMMAND_COL_WIDTH = Math.max(...COMMANDS.map((cmd) => cmd.name.length)) + 4;
 
 type CommandMenuProps = {
   query: string;
@@ -29,7 +25,10 @@ export function CommandMenu({
 }: CommandMenuProps) {
   const { colors } = useTheme();
   const { isAuthenticated } = useAuth();
-  const filtered = getFilteredCommands(query, isAuthenticated);
+  const { availableModels } = usePromptConfig();
+  const commands = getCommands(availableModels);
+  const filtered = getFilteredCommands(query, isAuthenticated, availableModels);
+  const commandColWidth = Math.max(...commands.map((cmd) => cmd.name.length)) + 4;
   const visibleHeight = Math.min(filtered.length, MAX_VISIBLE_ITEMS);
 
   if (filtered.length === 0) {
@@ -58,7 +57,7 @@ export function CommandMenu({
             onMouseMove={() => onSelect(i)}
             onMouseDown={() => onExecute(i)}
           >
-            <box width={COMMAND_COL_WIDTH} flexShrink={0}>
+            <box width={commandColWidth} flexShrink={0}>
               <text selectable={false} fg={isSelected ? "black" : "white"}>
                 /{cmd.name}
               </text>

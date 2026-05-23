@@ -16,8 +16,8 @@ import { EmptyBorder } from "./border";
 import { StatusBar } from "./status-bar";
 import { CommandMenu } from "./command-menu";
 import type { Command } from "./command-menu/types";
-import { COMMANDS } from "./command-menu/commands";
 import { useCommandMenu } from "./command-menu/use-command-menu";
+import { getCommands } from "./command-menu/commands";
 import { useToast } from "../providers/toast";
 import { useKeyboardLayer } from "../providers/keyboard-layer";
 import { useDialog } from "../providers/dialog";
@@ -275,7 +275,7 @@ export const TEXTAREA_KEY_BINDINGS: KeyBinding[] = [
 ];
 
 export function InputBar({ onSubmit, disabled = false }: Props) {
-  const { mode, toggleMode, setMode, setModel } = usePromptConfig();
+  const { mode, toggleMode, setMode, setModel, availableModels } = usePromptConfig();
   const textareaRef = useRef<TextareaRenderable>(null);
   const onSubmitRef = useRef<() => void>(() => {});
   const activeMentionRef = useRef<MentionMatch | null>(null);
@@ -319,7 +319,7 @@ export function InputBar({ onSubmit, disabled = false }: Props) {
     handleContentChange,
     resolveCommand,
     setSelectedIndex,
-  } = useCommandMenu(isAuthenticated);
+  } = useCommandMenu(isAuthenticated, availableModels);
 
   const showMentionMenu = activeMention !== null;
 
@@ -406,7 +406,7 @@ export function InputBar({ onSubmit, disabled = false }: Props) {
       const parts = text.split(" ");
       const cmdName = parts[0]?.slice(1).toLowerCase();
 
-      const command = COMMANDS.find(c => c.name === cmdName);
+      const command = getCommands(availableModels).find((c) => c.name === cmdName);
       if (command) {
         textarea.setText("");
         handleCommand(command);

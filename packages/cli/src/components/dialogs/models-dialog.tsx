@@ -1,12 +1,11 @@
 import { useCallback } from "react";
 import { useDialog } from "../../providers/dialog";
 import { DialogSearchList } from "../dialog-search-list";
-import { Mode } from "@arenacode/database/enums";
-import type { SupportedChatModelId } from "@arenacode/shared";
+import type { SupportedChatModel } from "@arenacode/shared";
 
 type ModelsDialogContentProps = {
-  models: SupportedChatModelId[];
-  onSelectModel: (modelId: SupportedChatModelId) => void;
+  models: SupportedChatModel[];
+  onSelectModel: (modelId: string) => void;
 };
 
 export const ModelsDialogContent = ({ 
@@ -16,8 +15,8 @@ export const ModelsDialogContent = ({
   const dialog = useDialog();
 
   const handleSelect = useCallback(
-    (modelId: SupportedChatModelId) => {
-      onSelectModel(modelId);
+    (model: SupportedChatModel) => {
+      onSelectModel(model.id);
       dialog.close();
     },
     [dialog, onSelectModel],
@@ -27,13 +26,16 @@ export const ModelsDialogContent = ({
     <DialogSearchList
       items={models}
       onSelect={handleSelect}
-      filterFn={(modelId, query) => modelId.toLowerCase().includes(query.toLowerCase())}
-      renderItem={(modelId, isSelected) => (
+      filterFn={(model, query) => {
+        const search = query.toLowerCase();
+        return `${model.id} ${model.provider}`.toLowerCase().includes(search);
+      }}
+      renderItem={(model, isSelected) => (
         <text selectable={false} fg={isSelected ? "black" : "white"}>
-          {modelId}
+          {model.id} · ${model.pricing.inputUsdPerMillionTokens}/M in, ${model.pricing.outputUsdPerMillionTokens}/M out
         </text>
       )}
-      getKey={(modelId) => modelId}
+      getKey={(model) => model.id}
       placeholder="Search models"
       emptyText="No matching models"
     />

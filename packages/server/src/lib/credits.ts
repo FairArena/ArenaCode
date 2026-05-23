@@ -1,9 +1,8 @@
 import {
-  SUPPORTED_CHAT_MODELS,
-  findSupportedChatModel,
   type ModelPricing,
 } from "@arenacode/shared";
 import type { LanguageModelUsage } from "ai";
+import { findSupportedChatModel, getSupportedChatModels } from "./models";
 
 type CalculateCreditsForUsageParams = {
   provider: string;
@@ -54,7 +53,7 @@ function getModelPricing(provider: string, model: string): ModelPricing {
   const supportedModel = findSupportedChatModel(model);
 
   if (!supportedModel || supportedModel.provider !== provider) {
-    if (!SUPPORTED_CHAT_MODELS.some((supportedModel) => supportedModel.provider === provider)) {
+    if (!getSupportedChatModels().some((supportedModel) => supportedModel.provider === provider)) {
       throw new Error(`Unsupported billing provider: ${provider}`);
     }
 

@@ -4,6 +4,7 @@ import { useKeyboard } from "@opentui/react";
 import { getFilteredCommands } from "./filter-commands";
 import type { Command } from "./types";
 import { useKeyboardLayer } from "../../providers/keyboard-layer";
+import type { SupportedChatModel } from "@arenacode/shared";
 
 type UseCommandMenuReturn = {
   showCommandMenu: boolean;
@@ -15,7 +16,7 @@ type UseCommandMenuReturn = {
   setSelectedIndex: (index: number) => void;
 };
 
-export function useCommandMenu(isAuthenticated: boolean): UseCommandMenuReturn {
+export function useCommandMenu(isAuthenticated: boolean, models: SupportedChatModel[]): UseCommandMenuReturn {
   const [textValue, setTextValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showCommandMenu, setShowCommandMenu] = useState(false);
@@ -25,8 +26,8 @@ export function useCommandMenu(isAuthenticated: boolean): UseCommandMenuReturn {
   const commandQuery = showCommandMenu && textValue.startsWith("/") ? textValue.slice(1) : "";
 
   const filteredCommands = useMemo(
-    () => getFilteredCommands(commandQuery, isAuthenticated),
-    [commandQuery, isAuthenticated],
+    () => getFilteredCommands(commandQuery, isAuthenticated, models),
+    [commandQuery, isAuthenticated, models],
   );
 
   const close = () => {

@@ -1,4 +1,4 @@
-import { SUPPORTED_CHAT_MODELS } from "@arenacode/shared";
+import type { SupportedChatModel } from "@arenacode/shared";
 import { 
   AgentsDialogContent,
   ModelsDialogContent,
@@ -12,7 +12,8 @@ import { clearAuth } from "../../lib/auth";
 
 import { openBillingPortal } from "../../lib/upgrade";
 
-export const COMMANDS: Command[] = [
+export function getCommands(models: SupportedChatModel[]): Command[] {
+  return [
   {
     name: "new",
     description: "Start a new conversation",
@@ -41,7 +42,7 @@ export const COMMANDS: Command[] = [
         title: "Select Model",
         children: (
           <ModelsDialogContent
-            models={SUPPORTED_CHAT_MODELS.map((model) => model.id)}
+            models={models}
             onSelectModel={ctx.setModel}
           />
         ),
@@ -126,4 +127,5 @@ export const COMMANDS: Command[] = [
       ctx.exit();
     },
   },
-];
+  ];
+}
