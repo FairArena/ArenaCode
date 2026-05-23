@@ -10,6 +10,26 @@ It is built for hands-on software work: planning, coding, debugging, browsing fi
 npm install -g arenacode-cli
 ```
 
+## Publish
+
+To publish a new npm release from the repo root:
+
+```bash
+npm --prefix packages/cli version patch --no-git-tag-version
+npm --prefix packages/cli pack --dry-run
+npm --prefix packages/cli publish --access public
+```
+
+The package `prepack` script builds `dist/` automatically before publish.
+
+## Environment
+
+Copy `packages/cli/.env.example` to `.env` in the directory where you run the CLI and set these values:
+
+- `API_URL`
+- `CLERK_FRONTEND_API`
+- `CLERK_OAUTH_CLIENT_ID`
+
 ## Start
 
 ```bash
