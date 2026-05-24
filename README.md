@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://fra.cloud.appwrite.io/v1/storage/buckets/697b974d001a7a80496e/files/697b9764002453409e98/view?project=69735edc00127d2033d8&mode=admin" alt="FairArena Logo" width="140" height="140">
+</p>
 <div align="center">
 
 <br />
@@ -21,35 +24,9 @@
   <a href="https://cwa.run/polar?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=badge_polar"><img src="https://img.shields.io/badge/Polar-000000?style=for-the-badge&logo=polar&logoColor=white" alt="Polar" /></a>&nbsp;
   <a href="https://cwa.run/coderabbit?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=badge_coderabbit"><img src="https://img.shields.io/badge/CodeRabbit-FF6C37?style=for-the-badge&logo=rabbitmq&logoColor=white" alt="CodeRabbit" /></a>&nbsp;
   <a href="https://cwa.run/sentry?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=badge_sentry"><img src="https://img.shields.io/badge/Sentry-362D59?style=for-the-badge&logo=sentry&logoColor=white" alt="Sentry" /></a>&nbsp;
-  <a href="https://cwa.run/railway?utm_source=github&utm_medium=readme&utm_campaign=arenacode&utm_content=badge_railway"><img src="https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" alt="Railway" /></a>
 </p>
 
 </div>
-
-<br />
-
-## Tutorial
-
-Each chapter has a matching branch so you can check out the code at any point in the tutorial:
-
-| Branch | Chapter |
-|--------|---------|
-| `main` | Final project |
-| `01-project-setup-component-architecture` | Project setup and component architecture |
-| `02-ui-infrastructure` | Terminal UI infrastructure |
-| `03-routing-screen-layout` | Routing and screen layout |
-| `04-server-shared-database` | Server, shared package, and database |
-| `05-ai-chat-streamiing` | AI chat streaming |
-| `06-session-management-config` | Session management and configuration |
-| `07-tool-calling` | Tool calling |
-| `08-user-experience` | User experience polish |
-| `09-billing` | Billing and credit metering |
-| `10-client-side-tool-execution` | Client-side tool execution |
-| `11-the-end` | Final tutorial state |
-
-```bash
-git checkout 07-tool-calling  # example: jump to tool calling
-```
 
 ## Features
 
@@ -92,8 +69,7 @@ Fill in the required values:
 API_URL=http://localhost:3000
 DATABASE_URL=
 
-ANTHROPIC_API_KEY=
-OPENAI_API_KEY=
+OPENROUTER_API_KEY=
 
 CLERK_FRONTEND_API=
 CLERK_OAUTH_CLIENT_SECRET=6WShrdJL2ExIJxhl516Bw8ejV1iMTQYr
@@ -257,3 +233,14 @@ packages/
 | `@arenacode/server` | Hono API, AI streaming, auth checks, and billing ingestion |
 | `@arenacode/database` | Prisma client and database schema |
 | `@arenacode/shared` | Shared Zod schemas, AI tool contracts, and model definitions |
+
+## Publish
+
+To publish a new npm release from the repo root:
+
+```bash
+npm login
+npm --prefix packages/cli version patch --no-git-tag-version
+npm --prefix packages/cli pack --dry-run
+npm --workspace packages/cli publish --access public
+```

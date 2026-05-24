@@ -1,6 +1,6 @@
 {
   "name": "arenacode-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ArenaCode is a terminal AI coding agent with OpenRouter model support, local tool execution, and backend-driven pricing.",
   "keywords": [
     "arenacode",
@@ -39,12 +39,11 @@
   "files": [
     "bin",
     "dist",
-    "README.md",
-    ".env.example"
+    "README.md"
   ],
   "scripts": {
     "dev": "bun run --watch src/index.tsx",
-    "build": "bun build src/index.tsx --outdir dist --target bun",
+    "build": "bun run scripts/build.ts",
     "prepack": "bun run build"
   },
   "devDependencies": {

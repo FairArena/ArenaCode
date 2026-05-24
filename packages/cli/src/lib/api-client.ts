@@ -1,5 +1,6 @@
 import { hc } from "hono/client";
 import type { AppType } from "@arenacode/server";
+import "./env";
 import { clearAuth, getAuth } from "./auth";
 
 export const apiClient = hc<AppType>(

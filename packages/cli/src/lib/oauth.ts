@@ -1,4 +1,5 @@
 import open from "open";
+import "./env";
 import { saveAuth } from "./auth";
 import { renderSuccessPage } from "@arenacode/shared";
 
